@@ -10,3 +10,67 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+    size_t	i;
+
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+int	ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return (i);
+	return (-1);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size > 0)
+	{
+		while (src[i] && i < size - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	str = malloc(len * (sizeof(char)) + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len && s[i + start])
+	{
+		str[i] = s[i + start];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
