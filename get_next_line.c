@@ -18,6 +18,13 @@ static void ft_lstdel(t_list_fd **list, int fd)
     t_list_fd *temp;
     
     node = *list;
+    if (!node->next)
+    {
+        free(node->buffer);
+        free(node);
+        *list = NULL;
+        return ;
+    }
     while (node && node->fd != fd)
     {
         temp = node;
