@@ -57,7 +57,6 @@ static t_list_fd	*ft_lstfind(t_list_fd **list, int fd)
             free(node);
             return (NULL);
         }
-        node->buffer[BUFFER_SIZE] = '\0';
         node->mem_size = BUFFER_SIZE + 1;
         node->len = 0;
         node->next = *list;
@@ -77,7 +76,7 @@ static int	ft_read(int fd, t_list_fd *node)
     {
 		temp = node->buffer;
         node->mem_size = ((node->len + BUFFER_SIZE + 1) * 2);
-        node->buffer = ft_calloc(node->mem_size, sizeof(char));
+        node->buffer = malloc(node->mem_size);
         if (!node->buffer)
         {
             free(temp);
@@ -115,7 +114,7 @@ static char *ft_extract_line(t_list_fd *node)
     temp = node->buffer;
     node->buffer = ft_substr(node->buffer, pos + 1, node->len - pos - 1);
     free(temp);
-    node->len = ft_strlen(node->buffer);
+    node->len = node->len - pos - 1;
     node->mem_size = node->len;
     return (line);
 }

@@ -18,6 +18,7 @@ static void ft_lstdel(t_list_fd **list, int fd)
     t_list_fd *temp;
     
     node = *list;
+    temp = NULL;
     if (!node->next)
     {
         free(node->buffer);
@@ -104,7 +105,7 @@ static char *ft_extract_line(t_list_fd *node)
     temp = node->buffer;
     node->buffer = ft_substr(node->buffer, pos + 1, node->len - pos - 1);
     free(temp);
-    node->len = ft_strlen(node->buffer);
+    node->len = node->len - pos - 1;
     return (line);
 }
 
