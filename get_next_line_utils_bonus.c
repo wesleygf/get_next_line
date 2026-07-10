@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 20:26:40 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/09 20:26:40 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/07/10 11:21:10 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	ft_strlen(const char *s)
 {
-    size_t	i;
+	size_t	i;
 
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 int	ft_strchr(const char *s, int i)
@@ -81,7 +81,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	max = 2147483647;
 	if (size != 0 && nmemb > max / size)
 		return (NULL);
-	r_pointer = (malloc (size * nmemb));
+	r_pointer = (malloc(size * nmemb));
 	if (!r_pointer)
 		return (NULL);
 	i = 0;

@@ -43,6 +43,68 @@ You may change `BUFFER_SIZE` during compilation:
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 get_next_line.c get_next_line_utils.c
 ```
 
+## Example
+
+To test the project, create a file named **`gnl_test.txt`** in the same directory as the executable. Add any content you like to this file.
+
+Example content:
+
+```text
+Hello World!
+This is get_next_line.
+Each call returns one line.
+```
+
+Example `main.c`:
+
+```c
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "get_next_line.h"
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	fd = open("gnl_test.txt", O_RDONLY);
+	if (fd < 0)
+		return (1);
+
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+
+	close(fd);
+	return (0);
+}
+```
+
+Compile:
+
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
+main.c get_next_line.c get_next_line_utils.c
+```
+
+Run:
+
+```bash
+./a.out
+```
+
+Expected output:
+
+```text
+Hello World!
+This is get_next_line.
+Each call returns one line.
+```
+
 ---
 
 # Algorithm
