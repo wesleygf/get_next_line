@@ -28,12 +28,10 @@ typedef struct s_list_fd
     struct s_list_fd	*next;
 }	t_list_fd;
 
-
 char *get_next_line(int fd);
-int ft_strchr(const char *s, int c);
+int ft_strchr(const char *s, int i);
 size_t ft_strlcpy(char *dst, const char *src, size_t size);
 size_t ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-
 
 #endif

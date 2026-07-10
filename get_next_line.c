@@ -91,7 +91,7 @@ static char *ft_extract_line(t_list_fd *node)
     char *temp;
     int  pos;
 
-    pos = ft_strchr(node->buffer, '\n');
+    pos = ft_strchr(node->buffer, 0);
     if (pos == -1)
     {
         line = ft_substr(node->buffer, 0, node->len);
@@ -110,27 +110,28 @@ static char *ft_extract_line(t_list_fd *node)
 
 char	*get_next_line(int fd)
 {
-    static t_list_fd    **list;
+    static t_list_fd    *list;
     t_list_fd           *node;
     int                 len;
+    int                 scn;
     
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    if (!list)
-        list = malloc(sizeof(t_list_fd *));
-    node = ft_lstfind(list, fd);
+    node = ft_lstfind(&list, fd);
     if (!node)
         return (NULL);
     len = 1;
-    while ((!node->buffer || ft_strchr(node->buffer, '\n') == -1) && len > 0 )
+    scn = 0;
+    while ((!node->buffer || ft_strchr(node->buffer, scn) == -1) && len > 0)
     {
+        scn = node->len;
         len = ft_read(fd, node);
         if (len == -1)
-            return (NULL);
+            return (NULL); 
     }
     if ( node->len == 0)
     {
-        ft_lstdel(list, fd);
+        ft_lstdel(&list, fd);
         return (NULL);
     }
     return (ft_extract_line(node));

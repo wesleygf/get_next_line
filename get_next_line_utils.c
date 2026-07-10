@@ -22,18 +22,15 @@ size_t	ft_strlen(const char *s)
     return (i);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int i)
 {
-	int	i;
-
-	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char)c)
+		if (s[i] == '\n')
 			return (i);
 		i++;
 	}
-	if (s[i] == (char)c)
+	if (s[i] == '\n')
 		return (i);
 	return (-1);
 }
